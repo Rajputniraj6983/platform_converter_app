@@ -1,9 +1,24 @@
+import 'dart:js';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:platform_converter_app/views/screen/firstscreen.dart';
+import 'package:platform_converter_app/providers/Dateprovider.dart';
+import 'package:platform_converter_app/providers/Themeprovider.dart';
+import 'package:provider/provider.dart';
+
+import 'providers/Chnageprovider.dart';
+import 'providers/Listprovider.dart';
+import 'providers/Profilephotoprovider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers:[
+    ChangeNotifierProvider(create: (context) => DateProvider(),),
+    ChangeNotifierProvider(create: (context) => TimeProvider(),),
+    ChangeNotifierProvider(create: (context) => Profileprovider(),),
+    ChangeNotifierProvider(create: (context) => Listprovider(),),
+    ChangeNotifierProvider(create: (context) => Themeprovider(),),
+    ChangeNotifierProvider(create: (context) => Changeprovider(),),
+  ],child: MyApp(),),);
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       routes: {
-        '/' : (context) => firstscreen(),
+        '/' : (context) => Homescreen(),
       },
     );
   }
